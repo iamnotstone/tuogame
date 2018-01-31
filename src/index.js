@@ -1,0 +1,1 @@
+export {ReactComponent} from './reactComponent'
