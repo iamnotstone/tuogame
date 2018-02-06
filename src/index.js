@@ -1,1 +1,5 @@
-export {ReactComponent} from './reactComponent'
+export {ReactComponent, container, camera} from './reactComponent'
+export {GameComponent} from './gameComponent'
+export {addGameComponent, removeGameComponent} from './core'
+export {GameBase} from './gameBase'
+export {Controller} from './controller'

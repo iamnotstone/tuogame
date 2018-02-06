@@ -1,6 +1,7 @@
 import React from 'react'
 
-var scene, camera, globalGroup
+var scene, camera, globalGroup, container;
+var componentCount = 0
 
 class ReactComponent extends React.Component{
   constructor(props){
@@ -21,7 +22,7 @@ class ReactComponent extends React.Component{
 	  this.renderer = new THREE.WebGLRenderer({antialias: true})
 		this.renderer.setPixelRatio(window.devicePixelRatio)
 		this.renderer.setSize(this.width, this.height)
-		this.container.appendChild(this.renderer.domElement)
+		container.appendChild(this.renderer.domElement)
 
     globalGroup = new THREE.Group()
     scene.add(globalGroup)
@@ -34,8 +35,18 @@ class ReactComponent extends React.Component{
     this.renderer.render(scene, camera)
   }
 
+  componentWillMount(){
+    if(componentCount > 1)
+      throw 'can not mount two reactgame.ReactComponent in the mean time'
+    componentCount ++
+  }
+
+  componentWillUnmount(){
+    if(componentCount > 0)
+      componentCount --
+  }
+
   componentDidMount(){
-    const container = this.container;     
     this.width = container.offsetWidth
     this.height = container.offsetHeight
 	  this.initThree()
@@ -46,8 +57,8 @@ class ReactComponent extends React.Component{
 	}
 
   _onDocumentResize(){
-    this.width = this.container.offsetWidth
-    this.height = this.container.offsetHeight
+    this.width = container.offsetWidth
+    this.height = container.offsetHeight
     this.renderer.setSize(this.width, this.height)
     camera.aspect = this.width / this.height
     camera.updateProjectionMatrix()
@@ -55,7 +66,7 @@ class ReactComponent extends React.Component{
 
   render(){
     return <div
-      ref = {node => this.container = node}
+      ref = {node => container = node}
       style = {{
         height: '100%',
         width: '100%'
@@ -65,4 +76,4 @@ class ReactComponent extends React.Component{
   }
 }
 
-export {ReactComponent, scene, camera, globalGroup}
+export {ReactComponent, scene, camera, globalGroup, container}

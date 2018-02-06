@@ -1,8 +1,8 @@
 import * as TuoGame from 'tuogame'
 import {render} from 'react-dom'
 import React from 'react'
+import {MovingGame} from './movingGame'
 
-const TuoGameReact = TuoGame.ReactComponent
 
 render(<div
     style = {{
@@ -10,6 +10,6 @@ render(<div
       height: '100vh'
     }}
   >
-    <TuoGameReact/>
+    <MovingGame/>
   </div>, document.getElementById('root')
 )
