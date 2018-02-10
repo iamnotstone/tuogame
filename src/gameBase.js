@@ -5,7 +5,6 @@ class GameBase extends React.Component{
 
   constructor(props){
     super(props)
-    this.controllers = {}
     this.animators = []
   }
 
@@ -13,8 +12,13 @@ class GameBase extends React.Component{
     throw('initGame not implemted')
   }
 
+  prevCondition(){
+    return Promise.resolve()
+  }
+
   componentDidMount(){
-    this.initGame()
+    this.prevCondition()
+      .then(() => (this.initGame()))
   }
 
   render(){

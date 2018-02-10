@@ -1,6 +1,7 @@
 import React from 'react'
 
-var scene, camera, globalGroup, container;
+var scene, camera, globalGroup, container, renderer;
+var animators = []
 var componentCount = 0
 
 class ReactComponent extends React.Component{
@@ -19,10 +20,10 @@ class ReactComponent extends React.Component{
 		this.light = new THREE.PointLight(0xf0f0f0,1)
 		camera.add(this.light)
 		scene.add(camera)
-	  this.renderer = new THREE.WebGLRenderer({antialias: true})
-		this.renderer.setPixelRatio(window.devicePixelRatio)
-		this.renderer.setSize(this.width, this.height)
-		container.appendChild(this.renderer.domElement)
+	  renderer = new THREE.WebGLRenderer({antialias: true})
+		renderer.setPixelRatio(window.devicePixelRatio)
+		renderer.setSize(this.width, this.height)
+		container.appendChild(renderer.domElement)
 
     globalGroup = new THREE.Group()
     scene.add(globalGroup)
@@ -32,7 +33,19 @@ class ReactComponent extends React.Component{
 
   animate(){
     requestAnimationFrame(this.animate)
-    this.renderer.render(scene, camera)
+    this.execAnimators()
+    renderer.render(scene, camera)
+  }
+
+  execAnimators(){
+    let newAnimators = []
+    animators.forEach((animator) => {
+      if(animator.isActive){
+        animator.exec()
+        newAnimators.push(animator)
+      }
+    })
+    animators = newAnimators
   }
 
   componentWillMount(){
@@ -59,7 +72,7 @@ class ReactComponent extends React.Component{
   _onDocumentResize(){
     this.width = container.offsetWidth
     this.height = container.offsetHeight
-    this.renderer.setSize(this.width, this.height)
+    renderer.setSize(this.width, this.height)
     camera.aspect = this.width / this.height
     camera.updateProjectionMatrix()
   }
@@ -76,4 +89,4 @@ class ReactComponent extends React.Component{
   }
 }
 
-export {ReactComponent, scene, camera, globalGroup, container}
+export {ReactComponent, scene, camera, globalGroup, container, renderer, animators}
