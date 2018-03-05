@@ -1,3 +1,5 @@
+var controllers = []
+export {controllers}
 export class Controller{
   constructor(){
     this.gameComponent = null
@@ -14,9 +16,13 @@ export class Controller{
   load(component){
     this.gameComponent = component
     this.mountController()
+    controllers.push(this)
   }
 
   unload(){
     this.umountController()
+    let i = controllers.indexOf(this)
+    controllers.splice(i,1)
   }
 }
+

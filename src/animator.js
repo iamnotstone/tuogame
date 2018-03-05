@@ -28,7 +28,6 @@ export class Animator {
   }
 
   unload(){
-    let i = animators.indexOf(this)
-    animators.splice(i,1)
+    this.isActive = false
   }
 }

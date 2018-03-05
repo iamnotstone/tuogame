@@ -1,8 +1,9 @@
 import React from 'react'
 
-var scene, camera, globalGroup, container, renderer;
+var scene, camera, globalGroup, container, renderer, activeCamera;
 var animators = []
 var componentCount = 0
+var width, height
 
 class ReactComponent extends React.Component{
   constructor(props){
@@ -12,17 +13,20 @@ class ReactComponent extends React.Component{
   }
 
   initThree(){
+    animators = []
     scene = new THREE.Scene()
 		scene.background = new THREE.Color(0xb39c9c)
-	  camera = new THREE.PerspectiveCamera(50, this.width / this.height, 1, 1000)
+	  camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000)
 		
-		camera.position.set(0, 0, 1000)
+		camera.position.set(0, 0, 100)
+    camera.lookAt(0,0,0)
 		this.light = new THREE.PointLight(0xf0f0f0,1)
 		camera.add(this.light)
 		scene.add(camera)
+    activeCamera = camera
 	  renderer = new THREE.WebGLRenderer({antialias: true})
 		renderer.setPixelRatio(window.devicePixelRatio)
-		renderer.setSize(this.width, this.height)
+		renderer.setSize(width, height)
 		container.appendChild(renderer.domElement)
 
     globalGroup = new THREE.Group()
@@ -34,7 +38,7 @@ class ReactComponent extends React.Component{
   animate(){
     requestAnimationFrame(this.animate)
     this.execAnimators()
-    renderer.render(scene, camera)
+    renderer.render(scene, activeCamera)
   }
 
   execAnimators(){
@@ -55,13 +59,14 @@ class ReactComponent extends React.Component{
   }
 
   componentWillUnmount(){
+    animators = []
     if(componentCount > 0)
       componentCount --
   }
 
   componentDidMount(){
-    this.width = container.offsetWidth
-    this.height = container.offsetHeight
+    width = container.offsetWidth
+    height = container.offsetHeight
 	  this.initThree()
     container.addEventListener('touchstart', this._onDocumentTouchStart, false);
     container.addEventListener('touchmove', this._onDocumentTouchMove, false);  
@@ -70,11 +75,11 @@ class ReactComponent extends React.Component{
 	}
 
   _onDocumentResize(){
-    this.width = container.offsetWidth
-    this.height = container.offsetHeight
-    renderer.setSize(this.width, this.height)
-    camera.aspect = this.width / this.height
-    camera.updateProjectionMatrix()
+    width = container.offsetWidth
+    height = container.offsetHeight
+    renderer.setSize(width, height)
+    activeCamera.aspect = width / height
+    activeCamera.updateProjectionMatrix()
   }
 
   render(){
@@ -89,4 +94,8 @@ class ReactComponent extends React.Component{
   }
 }
 
-export {ReactComponent, scene, camera, globalGroup, container, renderer, animators}
+function setActiveCamera(c){
+  activeCamera = c
+}
+
+export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height}

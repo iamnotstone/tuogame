@@ -1,3 +1,5 @@
+import {removeGameComponent} from './core'
+
 export class GameComponent {
   constructor(obj){
     this.threeObj = obj
@@ -23,5 +25,9 @@ export class GameComponent {
 
   updateParameter(name, value){
     this.parameters[name].update(value)
+  }
+
+  dispose(){
+    removeGameComponent(this)
   }
 }
