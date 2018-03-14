@@ -8,6 +8,8 @@ var isReady = true
 var readyCallback 
 
 export function setReadyCallback(cb){readyCallback = cb}
+export function setIsReady(ready){isReady = ready}
+
 
 class ReactComponent extends React.Component{
   constructor(props){

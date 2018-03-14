@@ -1,5 +1,5 @@
 import React from 'react'
-import {ReactComponent,scene, isReady} from './reactComponent'
+import {ReactComponent,scene, setIsReady} from './reactComponent'
 import {controllers} from './controller'
 var eventDispatcher
 export {eventDispatcher}
@@ -32,7 +32,7 @@ class GameBase extends React.Component{
     this.prevCondition()
       .then(() => (this.initGame()))
     eventDispatcher = new THREE.EventDispatcher()
-    isReady = false
+    setIsReady(false)
   }
 
   componentWillUnmount(){
