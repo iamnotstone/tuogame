@@ -1,6 +1,6 @@
 import React from 'react'
 import {ReactComponent,scene, isReady} from './reactComponent'
-import {controllers} from './controller''
+import {controllers} from './controller'
 var eventDispatcher
 export {eventDispatcher}
 function clearThree(obj){
