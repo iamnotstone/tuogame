@@ -31,8 +31,8 @@ class GameBase extends React.Component{
   componentDidMount(){
     this.prevCondition()
       .then(() => (this.initGame()))
+      .then(() => setIsReady(false))
     eventDispatcher = new THREE.EventDispatcher()
-    setIsReady(false)
   }
 
   componentWillUnmount(){
