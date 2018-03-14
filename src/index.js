@@ -1,6 +1,6 @@
 export {ReactComponent, container, 
   setActiveCamera, camera, scene, renderer, 
-  globalGroup, animators, width, height} from './reactComponent'
+  globalGroup, animators, width, height, setReadyCallback} from './reactComponent'
 export {GameComponent} from './gameComponent'
 export {addGameComponent, removeGameComponent} from './core'
 export {GameBase, eventDispatcher} from './gameBase'
