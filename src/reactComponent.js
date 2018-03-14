@@ -4,6 +4,10 @@ var scene, camera, globalGroup, container, renderer, activeCamera;
 var animators = []
 var componentCount = 0
 var width, height
+var isReady = true
+var readyCallback 
+
+export function setReadyCallback(cb){readyCallback = cb}
 
 class ReactComponent extends React.Component{
   constructor(props){
@@ -39,6 +43,10 @@ class ReactComponent extends React.Component{
     requestAnimationFrame(this.animate)
     this.execAnimators()
     renderer.render(scene, activeCamera)
+    if(!isReady){
+      if(readyCallback) readyCallback()
+      isReady = true
+    }
   }
 
   execAnimators(){
@@ -98,4 +106,4 @@ function setActiveCamera(c){
   activeCamera = c
 }
 
-export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height}
+export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height, isReady}
