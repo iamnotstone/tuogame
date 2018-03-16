@@ -115,4 +115,4 @@ function setActiveCamera(c){
   activeCamera = c
 }
 
-export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height, isReady, setInitRenderer}
+export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height, isReady}
