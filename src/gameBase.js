@@ -28,6 +28,7 @@ class GameBase extends React.Component{
     return Promise.resolve()
   }
 
+
   componentDidMount(){
     this.prevCondition()
       .then(() => (this.initGame()))

@@ -6,9 +6,12 @@ var componentCount = 0
 var width, height
 var isReady = true
 var readyCallback 
+var initRenderer
+
 
 export function setReadyCallback(cb){readyCallback = cb}
 export function setIsReady(ready){isReady = ready}
+export function setInitRenderer(cb){initRenderer = cb }
 
 
 class ReactComponent extends React.Component{
@@ -33,9 +36,9 @@ class ReactComponent extends React.Component{
 	  renderer = new THREE.WebGLRenderer({antialias: true})
 		renderer.setPixelRatio(window.devicePixelRatio)
 		renderer.setSize(width, height)
-
-    renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.BasicShadowMap; // default THREE.PCFShadowMap
+    if(initRenderer) initRenderer(renderer)
+    //renderer.shadowMap.enabled = true;
+    //renderer.shadowMap.type = THREE.BasicShadowMap; // default THREE.PCFShadowMap
 
 		container.appendChild(renderer.domElement)
 
@@ -112,4 +115,4 @@ function setActiveCamera(c){
   activeCamera = c
 }
 
-export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height, isReady}
+export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height, isReady, setInitRenderer}
