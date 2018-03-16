@@ -35,7 +35,7 @@ class ReactComponent extends React.Component{
 		renderer.setSize(width, height)
 
     renderer.shadowMap.enabled = true;
-    renderer.shadowMap.type = THREE.PCFSoftShadowMap; // default THREE.PCFShadowMap
+    renderer.shadowMap.type = THREE.PCFShadowMap; // default THREE.PCFShadowMap
 
 		container.appendChild(renderer.domElement)
 
