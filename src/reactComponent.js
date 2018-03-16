@@ -36,9 +36,9 @@ class ReactComponent extends React.Component{
 	  renderer = new THREE.WebGLRenderer({antialias: true})
 		renderer.setPixelRatio(window.devicePixelRatio)
 		renderer.setSize(width, height)
-    if(initRenderer) initRenderer(renderer)
-    //renderer.shadowMap.enabled = true;
-    //renderer.shadowMap.type = THREE.BasicShadowMap; // default THREE.PCFShadowMap
+    //if(initRenderer) initRenderer(renderer)
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFShadowMap; // default THREE.PCFShadowMap
 
 		container.appendChild(renderer.domElement)
 
