@@ -73,7 +73,8 @@ class ReactComponent extends React.Component{
         newAnimators.push(animator)
       }
     })
-    animators = newAnimators.concat(newAnimators)
+    animators = newAnimators.concat(addAnimators)
+    addAnimators = []
   }
 
   componentWillMount(){
