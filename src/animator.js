@@ -1,4 +1,4 @@
-import {animators} from './reactComponent'
+import {addAnimators} from './reactComponent'
 
 export class Animator {
   constructor(obj){
