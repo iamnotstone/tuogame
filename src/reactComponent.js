@@ -2,6 +2,7 @@ import React from 'react'
 
 var scene, camera, globalGroup, container, renderer, activeCamera;
 var animators = []
+var addAnimators = []
 var componentCount = 0
 var width, height
 var isReady = true
@@ -25,6 +26,7 @@ class ReactComponent extends React.Component{
 
   initThree(){
     animators = []
+    addAnimators = []
     scene = new THREE.Scene()
 		scene.background = new THREE.Color(0xb39c9c)
 	  camera = new THREE.PerspectiveCamera(50, width / height, 1, 1000)
@@ -71,7 +73,7 @@ class ReactComponent extends React.Component{
         newAnimators.push(animator)
       }
     })
-    animators = newAnimators
+    animators = newAnimators.concat(newAnimators)
   }
 
   componentWillMount(){
@@ -121,4 +123,4 @@ function setActiveCamera(c){
   activeCamera = c
 }
 
-export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, animators, width, height, isReady}
+export {ReactComponent, scene, setActiveCamera, camera, globalGroup, container, renderer, addAnimators, width, height, isReady}
