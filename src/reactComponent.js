@@ -7,11 +7,13 @@ var width, height
 var isReady = true
 var readyCallback 
 var initRenderer
+var isAbort = false
 
 
 export function setReadyCallback(cb){readyCallback = cb}
 export function setIsReady(ready){isReady = ready}
 export function setInitRenderer(cb){initRenderer = cb }
+export function setAbort(){isAbort = true}
 
 
 class ReactComponent extends React.Component{
@@ -44,17 +46,20 @@ class ReactComponent extends React.Component{
 
     globalGroup = new THREE.Group()
     scene.add(globalGroup)
+    isAbort = false
     this.animate()
     
 	}
 
   animate(){
-    requestAnimationFrame(this.animate)
-    this.execAnimators()
-    renderer.render(scene, activeCamera)
-    if(!isReady){
-      if(readyCallback) readyCallback()
-      isReady = true
+    if(!isAbort){
+      requestAnimationFrame(this.animate)
+      this.execAnimators()
+      renderer.render(scene, activeCamera)
+      if(!isReady){
+        if(readyCallback) readyCallback()
+        isReady = true
+      }
     }
   }
 

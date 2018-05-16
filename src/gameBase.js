@@ -1,5 +1,5 @@
 import React from 'react'
-import {ReactComponent,scene, setIsReady} from './reactComponent'
+import {ReactComponent,scene, setIsReady, setAbort} from './reactComponent'
 import {controllers} from './controller'
 var eventDispatcher
 export {eventDispatcher}
@@ -37,6 +37,7 @@ class GameBase extends React.Component{
   }
 
   componentWillUnmount(){
+    setAbort()
     clearThree(scene)
     controllers.forEach(c => c.unload())
   }
