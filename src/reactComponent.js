@@ -84,7 +84,8 @@ class ReactComponent extends React.Component{
   componentDidMount(){
     width = container.offsetWidth
     height = container.offsetHeight
-	  this.initThree()
+    setTimeout(this.initThree.bind(this), 1000)
+	  //this.initThree()
     container.addEventListener('touchstart', this._onDocumentTouchStart, false);
     container.addEventListener('touchmove', this._onDocumentTouchMove, false);  
 		window.addEventListener('resize', this._onDocumentResize, false)
