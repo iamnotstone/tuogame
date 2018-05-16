@@ -21,9 +21,9 @@ export class Animator {
 
   }
 
-  load(){
+  load(startT){
     this.init()
-    this.startT = new Date().getTime()
+    this.startT = startT || new Date().getTime()
     animators.push(this)
   }
 
