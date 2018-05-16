@@ -1,8 +1,9 @@
 import {addAnimators} from './reactComponent'
 
 export class Animator {
-  constructor(obj){
+  constructor(obj, userData){
     this.obj = obj
+    this.userData = userData
     this.startT = null
     this.isActive = true
     this.exec = this.exec.bind(this)
